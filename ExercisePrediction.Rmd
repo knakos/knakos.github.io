@@ -1,0 +1,330 @@
+---
+title: "Predicting Exercise Classe"
+author: "Konstantinos Nakos"
+date: "July 11, 2016"
+output: html_document
+---
+
+```{r setup, include=TRUE, cache=TRUE}
+        
+        require(knitr)
+
+        knitr::opts_chunk$set(echo = TRUE)
+        
+        opts_knit$set(root.dir = 'C:/Users/Konstantinos/Dropbox/R/Machine Learning/Prediction Assignment')
+        
+        library(caret)
+        library(ggplot2)
+
+        library(plyr)
+
+        library(xtable)
+        library(rattle)
+        library(rpart.plot)
+
+        #Disabling scientific notation
+        options(scipen = 999)
+
+        #Forcing two-digits printout for easier reading
+        options(digits = 2)
+
+        #Setting random seed to... 42
+        #as it is the answer to... everything... :=)
+        set.seed(42)
+
+```
+
+#Executive summary
+
+The goal of this project is to build a model which will predict the manner in which people perform a particular exercise, namely the 'Unilateral Dumbbell Biceps Curls'.
+
+The dataset was provided by Velloso et al. (2013) and can be found here: http://groupware.les.inf.puc-rio.br/har . In the aforementioned website there is also additional information regarding the setup of the study and the specifics of data collection.
+
+Through the development of a Random Forest model, we have been able to correctly predict 100% of the out-of-sample cases (testing dataset).
+
+
+
+#Data
+The specific data used for the analysis (as per course instructions) can be found below: 
+
+* Training:     https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
+* Testing:      https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv
+
+The code below downloads the data, if they are not already stored locally.
+
+```{r DATA LOADING, include=TRUE, cache=TRUE}
+        
+        #Check if the directory exists, if not, create it
+        if(!file.exists("Dataset")){
+                dir.create("Dataset")
+        }
+        
+        #Check if TRAINING file exists, if not, download it
+        if(!file.exists("./Dataset/pml-training.csv")){
+                download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", 
+                              destfile = "./Dataset/pml-training.csv")
+        }
+
+        #Check if TESTING file exists, if not, download it
+        if(!file.exists("./Dataset/pml-testing.csv")){
+                download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv",
+                              destfile = "./Dataset/pml-testing.csv")
+        }
+        
+        #Load the TRAINING dataset
+        myTrainingDS <- read.csv2("./Dataset/pml-training.csv", 
+                                  sep = ",", 
+                                  stringsAsFactors = FALSE,
+                                  na.strings = c("NA", "#DIV/0!",""), 
+                                  header = TRUE)
+        
+        #Load the TESTING dataset
+        myTestingDS <- read.csv2("./Dataset/pml-testing.csv", 
+                                 sep = ",",
+                                 stringsAsFactors = FALSE,
+                                 na.strings = c("NA", "#DIV/0!",""), 
+                                 header = TRUE)
+
+```
+
+Once the data is loaded, we assign proper variable classes:
+
+```{r DATASET PROCESSING, include=TRUE, cache=TRUE}
+        
+        #Typo error correction
+        colnames(myTrainingDS)[13] <- "kurtosis_pitch_belt"
+        colnames(myTestingDS)[13] <- "kurtosis_pitch_belt"
+        
+        #Correcting data types
+        
+        ## TRAINING dataset
+        myTrainingDS$user_name <- as.factor(myTrainingDS$user_name)
+        myTrainingDS$cvtd_timestamp <- as.Date(myTrainingDS$cvtd_timestamp,
+                                               "%d/%m/%Y")
+        myTrainingDS$new_window <- as.factor(myTrainingDS$new_window)
+        myTrainingDS$classe <- as.factor(myTrainingDS$classe)
+
+        id <- c(8:ncol(myTrainingDS)-1) 
+        myTrainingDS[,id] <- as.numeric(unlist(myTrainingDS[,id]))
+        
+        ## TESTING dataset
+        myTestingDS$user_name <- as.factor(myTestingDS$user_name)
+        myTestingDS$cvtd_timestamp <- as.Date(myTestingDS$cvtd_timestamp,
+                                              "%d/%m/%Y")
+        myTestingDS$new_window <- as.factor(myTestingDS$new_window)
+        
+        id <- c(8:ncol(myTestingDS)-1) 
+        myTestingDS[,id] <- as.numeric(unlist(myTestingDS[,id]))
+
+        ## Object 'id' no longer needed
+        rm(id)
+        
+```
+
+Next step is to treat missing values - current choice was to remove all variables with large number of missing values. Most of them however refer to 'derivative' measures e.g., belt pitch skewness and kurtosis and, as such, information lost seems minimal.
+
+```{r DATA PROCESSING - NA values, include=TRUE, cache=TRUE}
+        
+        #Treatment of NA values
+        #       Chosen to remove the columns with lots of NA
+        #       In practice, this has to do with the removal of
+        #               'derivative' values, such as skewness and kurtosis
+        #               of the main variables, so there should be no
+        #               significant loss of information - besides, these
+        #               should be dealt with under own variable
+        #               transformations, if needed.
+        
+        ## TRAINING Dataset
+        tDS <- myTrainingDS[-c(1:7, 11:45, 49:83, 87:121, 125:159, 161)]
+        
+        ## TESTING Dataset
+        vDS <- myTestingDS[-c(1:7, 11:45, 49:83, 87:121, 125:159)]
+        
+```
+
+We next examine for the existence of (near)Zero Variance variables (candidates for removal). The analysis reveals that no such variables are currently included.
+
+```{r DATA PROCESSING - NZVs, include=TRUE, cache=TRUE, results="asis"}
+
+        #Identification and elimination of (near-)Zero Variance predictors
+        #       Last variable is 'classe2', which is not needed
+        #       No (N)ZV's found given elimination of most columns
+        tNZV <- nearZeroVar(tDS[,1:ncol(tDS)-1],
+                            saveMetrics = TRUE, 
+                            names = TRUE)
+        
+        options(xtable.html.table.attributes = 
+          list(style=sprintf("style='%s'",
+                             paste("border:0",
+                                   "border-top: 1px solid grey", 
+                                   "border-bottom: 1px solid grey",
+                                   sep="; "))))
+
+        print(xtable(x = tNZV, caption = "Near Zero Value variables"),
+              type = "html", caption.placement = "bottom")
+        
+```
+
+Finally, the (training) data are partitioned into two sets: the training set (60% of the data) and the testing set (remaining 40%) of the data, enabling model training and validation.
+
+```{r DATA PARTITIONING, include=TRUE, cache=TRUE, results="asis"}
+
+        #Creating data partitions and training/validation sets
+        inTrain <- createDataPartition(y = tDS$classe,
+                                       p=0.60, 
+                                       list = FALSE)
+        training <- tDS[inTrain,]
+        testing <- tDS[-inTrain,]
+
+```
+
+
+#Training the models
+
+For this exercise, two models have been selected: a partitioning/classification model as well as a Random Forest model. 
+
+The choice of the partitioning model has been due to its inherent simplicitly and interpretability: fundamentally, such models provide easy to follow (and most times intuitive also) decision rules.
+
+However, for this particular setup, such a simplistic approach does not seem appropriate: indeed, the performance level of any particular physical exercise is a quite complex task. As such, we have chosen to train a Random Forest model.
+
+##Classifications' model
+
+We initially train a partitioning model, as shown below:
+
+```{r PARTITIONS MODEL, include=TRUE, cache=TRUE, results="asis"}
+
+        #Partitions classification
+        modTR <- train(classe ~., data=training, method = "rpart")
+
+        fancyRpartPlot(modTR$finalModel, 
+                       main = "", 
+                       sub = "")
+
+        ## Testing partitioning model (training dataset)
+        y_TR <- predict(modTR$finalModel, 
+                        newdata = training, 
+                        type = "vector")
+        y_TR <- mapvalues(y_TR, 
+                          from=c("1", "2", "3", "4", "5"), 
+                          to=c("A", "B", "C", "D", "E"))
+
+        cm_TR <- suppressWarnings(confusionMatrix(y_TR, training$classe))
+
+        ## Testing partitioning model (validation dataset)
+        y_TR_valid <- predict(modTR$finalModel, 
+                              newdata = testing, 
+                              type = "vector")
+        y_TR_valid <- mapvalues(y_TR_valid, 
+                                from=c("1", "2", "3", "4", "5"),
+                                to=c("A", "B", "C", "D", "E"))
+
+        cm_TR_valid <- suppressWarnings(confusionMatrix(y_TR_valid,
+                                                        testing$classe))
+
+```
+
+Evidently, the resulting model tree generates an intuitive classification rule for classes "A" and "E", however its overall accuracy is limited, both on the training and the validation dataset.
+
+```{r PARTITIONS PRINTOUTS, include=TRUE, cache=TRUE, results="asis"}
+        
+        options(xtable.html.table.attributes = 
+          list(style=sprintf("style='%s'",
+                             paste("border:0",
+                                   "border-top: 1px solid grey", 
+                                   "border-bottom: 1px solid grey",
+                                   sep="; "))))
+
+        ### Classification table (training dataset)
+        print(xtable(cm_TR$table,
+               caption = "Partitioning classification table (training set)",
+               auto = TRUE),
+              type="html",
+              caption.placement = "bottom")
+
+        ### Accuracy statistic (training dataset)
+        cm_TR$overall[1]
+
+        ### Classification table (validation dataset)
+        print(xtable(cm_TR_valid$table,
+                     caption = "Partitioning classification table (validation set)",
+                     auto = TRUE),
+              type = "html",
+              caption.placement = "bottom")
+
+        ### Accuracy statistic (validation dataset)
+        cm_TR_valid$overall[1]
+```
+
+##Random forest model
+
+Given limited accuracy of the partitions model, we revert to a Random Forest model, as shown below:
+
+```{r RANDOM FOREST MODEL, include=TRUE, cache=TRUE, results="asis"}
+        
+        #THIS IS A VERY SPECIAL CODE CHUNK
+        #AS IT IS EXTREMELY NECESSARY TO BE CACHED...
+        #EACH RUN TAKES APPROX 6 HRS ON MY LAPTOP
+        #Random forest classification
+        modRF <- train(classe ~ ., 
+                       data = training, 
+                       method = "rf",
+                       prox=TRUE)
+
+```
+
+```{r RANDOM FOREST MODEL CONTINUED, include=TRUE, cache=TRUE, results="asis"}
+        
+        ## Testing random forest classification model (validation dataset)
+        y_RF_valid <- predict(modRF$finalModel, newdata = testing, type = "response")
+
+        ## Random forest confusion matrix (validation dataset)
+        cm_RF_valid <- confusionMatrix(y_RF_valid, testing$classe)
+
+        ## Accuracy statistic (validation dataset)
+        cm_RF_valid$overall[1]
+        
+        ## Variable importance chart
+        varImpPlot(modRF$finalModel, type = 2)
+
+```
+
+```{r RANDOM FOREST PRINTOUT, include=TRUE, cache=TRUE, results="asis"}
+
+        options(xtable.html.table.attributes = 
+          list(style=sprintf("style='%s'",
+                             paste("border:0",
+                                   "border-top: 1px solid grey", 
+                                   "border-bottom: 1px solid grey",
+                                   sep="; "))))
+
+        ### Classification table (validation dataset)
+        print(xtable(cm_RF_valid$table,
+                     caption = "Random Forest classification table (validation set)",
+                     auto = TRUE),
+              type="html",
+              caption.placement = "bottom")
+        
+        
+``` 
+
+Evidently, the results obtained from the Random Forest model render it way more useful for prediction in this context. As such, we employ the final (trained) model for prediction.
+
+
+#Predictions
+
+Using the final Random Forest model, we predict exercise performance in the out-of sample dataset to be the following:
+
+```{r FINAL PREDICTIONS, include=TRUE, cache=TRUE, results="asis"}
+
+        # Since Random forest accuracy is much higher than partitioning,
+        #       we will use for predictions in the TESTING dataset
+        # NOTE: THIS IS PERFORMED ONLY ONCE (NO FURTHER MODEL BUILDING)
+
+        ## Testing random forest classification model (validation dataset)
+        y_FINAL <- predict(modRF$finalModel, newdata = vDS, type = "response")
+
+        print(y_FINAL)
+         
+```
+
+Notably, these predictions have been used in the relevant quiz, rendering an impressive 100% out-of-sample accuracy.
