@@ -22,10 +22,10 @@
 }
 
 body {
-    font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Fira Sans', 'Times New Roman', Times, serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #fff;
+    background-color: #d1d1d1;
 }
 
 .container {
