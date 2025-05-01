@@ -1,7 +1,491 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konstantinos Nakos - Professional Profile</title>
+    <style>
+        :root {
+            --primary-color: #0077b5;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --accent-color: #e1e1e1;
+            --success-color: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        
+        main {
+            padding: 50px 0;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skills {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -16px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .timeline-title {
+            margin: 10px 0;
+            color: var(--text-color);
+        }
+        
+        .timeline-company {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .project-tag {
+            background-color: var(--secondary-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #005fa3;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--primary-color);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <header>
+        <div class="container header-content">
+            <img src="/api/placeholder/150/150" alt="Konstantinos Nakos" class="profile-img">
+            <h1>Konstantinos Nakos</h1>
+            <p class="tagline">Banking | Transformation | People & Technology </p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/knakos" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/knakos" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:kostas.nakos@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a strategic leader with expertise in [impact investing] and [international development]. Currently serving as Assistant General Manager (Human Resources & Organizational Effectiveness) with the National Bank of Greece.</p>
+                    <p>[...]</p>
+                </div>
+                <div class="skills">
+                    <h3>Skills & Expertise</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Impact Investing</span>
+                        <span class="skill-tag">Strategic Leadership</span>
+                        <span class="skill-tag">International Development</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Financial Strategy</span>
+                        <span class="skill-tag">Public-Private Partnerships</span>
+                        <span class="skill-tag">Affordable Housing</span>
+                        <span class="skill-tag">Industrial Development</span>
+                        <span class="skill-tag">Investment Management</span>
+                        <span class="skill-tag">Economic Reconstruction</span>
+                        <span class="skill-tag">Python</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2024 - Present</span>
+                        <h3 class="timeline-title">Assistant General Manager, Human Resources Strategy & Organizational Effectiveness</h3>
+                        <p class="timeline-company">National Bank of Greece</p>
+                        <p>Leading impact investing initiatives focused on Ukraine's reconstruction, with emphasis on affordable housing and industrial development projects. Working with government organizations, private equity investment, and development partners to drive measurable social impact.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Prior Experience</span>
+                        <h3 class="timeline-title">Previous Roles</h3>
+                        <p class="timeline-company">Various Organizations</p>
+                        <p>Extensive experience in investment management, strategic leadership, and international development initiatives across multiple sectors and regions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Key Projects</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Ukraine Affordable Housing Initiative" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Ukraine Affordable Housing Initiative</h3>
+                        <p>Leading the development of affordable multi-family housing projects in Ukraine as part of reconstruction efforts, creating sustainable communities and addressing critical housing shortages.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Affordable Housing</span>
+                            <span class="project-tag">Ukraine</span>
+                            <span class="project-tag">Impact Investing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Industrial Development Program" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Industrial Development Program</h3>
+                        <p>Strategic investment in industrial infrastructure to support economic recovery and job creation in key regions, working with local governments and development partners.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Industrial Development</span>
+                            <span class="project-tag">Economic Recovery</span>
+                            <span class="project-tag">Infrastructure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Regional Development Partnerships" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Regional Development Partnerships</h3>
+                        <p>Collaboration with Regional Development Agency of Lviv Region and other government agencies to implement targeted development initiatives that foster economic growth and resilience.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Public-Private Partnership</span>
+                            <span class="project-tag">Regional Development</span>
+                            <span class="project-tag">Government Relations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Konstantinos Nakos. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically handle the form submission with an API
+            // For GitHub Pages, you'll need a third-party form service
+            
+            alert('Thank you for your message! This is a demo form on a static site. In a production environment, this would send your message to Konstantinos.');
+            
+            // Reset the form
+            this.reset();
+        });
+    </script>
 </body>
 </html>
