@@ -38,7 +38,7 @@ body {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5em;
-    margin-top: 0.2em;
+    margin-top: 0.5em;
     line-height: 1.2;
 }
 
@@ -158,6 +158,109 @@ h2 {
 
 .skill-tag:hover {
     background-color: var(--accent-color);
+}
+
+/* Carousel Section */
+.carousel-section {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 60px 0;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 300px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: start;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.carousel-content {
+    padding: 20px;
+}
+
+.carousel-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.carousel-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.carousel-content .read-more {
+    display: inline-block;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.carousel-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .carousel-item {
+        flex: 0 0 250px;
+    }
 }
 
 /* Experience Timeline */
