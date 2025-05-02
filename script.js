@@ -70,6 +70,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+     // Get carousel elements
+     const carousel = document.querySelector('#words_of_wisdom .carousel');
+     const prevBtn = document.querySelector('#words_of_wisdom .prev');
+     const nextBtn = document.querySelector('#words_of_wisdom .next');
+     const items = document.querySelectorAll('#words_of_wisdom .carousel-item');
+     
+     // Calculate item width (including gap)
+     const itemWidth = items[0].offsetWidth + 20; // width + gap
+     
+     // Navigation buttons functionality
+     prevBtn.addEventListener('click', function() {
+         carousel.scrollLeft -= itemWidth;
+     });
+     
+     nextBtn.addEventListener('click', function() {
+         carousel.scrollLeft += itemWidth;
+     });
+     
+     // Optional: Auto-scroll functionality
+     let autoScrollInterval;
+     
+     function startAutoScroll() {
+         autoScrollInterval = setInterval(() => {
+             if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 10)) {
+                 // Reset to beginning if reached the end
+                 carousel.scrollLeft = 0;
+             } else {
+                 carousel.scrollLeft += itemWidth;
+             }
+         }, 5000); // Auto-scroll every 5 seconds
+     }
+     
+     function stopAutoScroll() {
+         clearInterval(autoScrollInterval);
+     }
+     
+     // Start auto-scroll when page loads
+     startAutoScroll();
+     
+     // Stop auto-scroll when user interacts with carousel
+     carousel.addEventListener('mouseenter', stopAutoScroll);
+     prevBtn.addEventListener('mouseenter', stopAutoScroll);
+     nextBtn.addEventListener('mouseenter', stopAutoScroll);
+     
+     // Resume auto-scroll when user stops interacting
+     carousel.addEventListener('mouseleave', startAutoScroll);
+     prevBtn.addEventListener('mouseleave', startAutoScroll);
+     nextBtn.addEventListener('mouseleave', startAutoScroll);
+     
+     // Handle touch devices
+     carousel.addEventListener('touchstart', stopAutoScroll);
+     carousel.addEventListener('touchend', startAutoScroll);
+
     // Call once on page load
     animateOnScroll();
     
