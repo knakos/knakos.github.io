@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
      
      // Navigation buttons functionality
      prevBtn.addEventListener('click', function() {
-         carousel.scrollLeft -= itemWidth;
+         smoothScroll(carousel.scrollLeft - itemWidth);
      });
      
      nextBtn.addEventListener('click', function() {
-         carousel.scrollLeft += itemWidth;
+         smoothScroll(carousel.scrollLeft + itemWidth);
      });
      
      // Optional: Auto-scroll functionality
@@ -95,15 +95,38 @@ document.addEventListener('DOMContentLoaded', function() {
          autoScrollInterval = setInterval(() => {
              if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 10)) {
                  // Reset to beginning if reached the end
-                 carousel.scrollLeft = 0;
+                 smoothScroll(0);
              } else {
-                 carousel.scrollLeft += itemWidth;
+                 smoothScroll(carousel.scrollLeft + itemWidth);
              }
-         }, 5000); // Auto-scroll every 5 seconds
+         }, 7000); // Increased auto-scroll interval to 7 seconds for smoother experience
      }
      
-     function stopAutoScroll() {
-         clearInterval(autoScrollInterval);
+     // Add smooth scrolling behavior
+     let isScrolling = false;
+     function smoothScroll(target) {
+         if (isScrolling) return;
+         isScrolling = true;
+         const start = carousel.scrollLeft;
+         const distance = target - start;
+         const duration = 500; // Match this with the CSS transition duration
+         let startTime = null;
+
+         function animation(currentTime) {
+             if (startTime === null) startTime = currentTime;
+             const timeElapsed = currentTime - startTime;
+             const progress = Math.min(timeElapsed / duration, 1);
+             const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2; // Smooth easing function
+             carousel.scrollLeft = start + (distance * easeProgress);
+
+             if (timeElapsed < duration) {
+                 requestAnimationFrame(animation);
+             } else {
+                 isScrolling = false;
+             }
+         }
+
+         requestAnimationFrame(animation);
      }
      
      // Start auto-scroll when page loads
