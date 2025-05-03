@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
              } else {
                  smoothScroll(carousel.scrollLeft + itemWidth);
              }
-         }, 7000); // Increased auto-scroll interval to 7 seconds for smoother experience
+         }, 12000); // Changed to 12 seconds as requested
      }
      
      // Add smooth scrolling behavior
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
          isScrolling = true;
          const start = carousel.scrollLeft;
          const distance = target - start;
-         const duration = 500; // Match this with the CSS transition duration
+         const duration = 800; // Increased duration for smoother transitions
          let startTime = null;
 
          function animation(currentTime) {
