@@ -137,3 +137,67 @@ document.addEventListener('DOMContentLoaded', function() {
     // Then call on scroll
     window.addEventListener('scroll', animateOnScroll);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Carousel navigation
+    const carousel = document.querySelector('.carousel');
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.querySelector('.nav-btn.prev');
+    const nextBtn = document.querySelector('.nav-btn.next');
+    
+    let currentIndex = 0;
+    const itemWidth = 320; // Width of item + gap
+    
+    function updateCarousel() {
+        carousel.scrollTo({
+            left: currentIndex * itemWidth,
+            behavior: 'smooth'
+        });
+    }
+    
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+    }
+    
+    // Touch events for mobile swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0 && currentIndex < items.length - 1) {
+                // Swipe left
+                currentIndex++;
+                updateCarousel();
+            } else if (diff < 0 && currentIndex > 0) {
+                // Swipe right
+                currentIndex--;
+                updateCarousel();
+            }
+        }
+    }
+});
