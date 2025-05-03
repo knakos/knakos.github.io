@@ -175,6 +175,7 @@ h2 {
     -webkit-overflow-scrolling: touch;
     gap: 20px;
     padding: 20px 0;
+    transition: transform 0.5s ease-in-out;
 }
 
 .carousel::-webkit-scrollbar {
@@ -188,7 +189,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     scroll-snap-align: start;
-    transition: all 0.3s;
+    transition: all 0.4s ease-in-out;
     overflow: hidden;
     position: relative;
 }
@@ -239,8 +240,8 @@ h2 {
 }
 
 .nav-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: #fff;
     border: none;
@@ -249,7 +250,8 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    font-size: 14px;
+    transition: all 0.4s ease-in-out;
 }
 
 .nav-btn:hover {
