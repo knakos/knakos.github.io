@@ -495,12 +495,12 @@ footer {
 }
 
 .topic-overview {
-    margin: 3rem 0;
+    margin: 1rem 0 0.5rem;  /* Reduced bottom margin */
 }
 
 .topic-intro {
     max-width: 800px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 0.5rem;  /* Reduced bottom margin */
 }
 
 .area-grid {
@@ -525,8 +525,18 @@ footer {
 .article-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 1.5rem;
+    margin: 1rem 0 0 0;
+}
+
+.article-grid:empty {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .article-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
 }
 
 .article-card {
@@ -534,6 +544,7 @@ footer {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 0.5rem;  /* Add small bottom margin to cards */
 }
 
 .article-content {
@@ -561,6 +572,204 @@ footer {
     .topic-title {
         font-size: 2rem;
     }
+}
+
+/* Quantitative Methods Topic Sections */
+.topic-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.topic-section h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.topic-section p {
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.topic-section .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.topic-section .article-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-section .article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.topic-section .article-card.coming-soon {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+}
+
+.topic-section .article-card.coming-soon .article-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.topic-section .article-card.coming-soon h3 {
+    color: #6c757d;
+}
+
+.topic-section .article-card.coming-soon p {
+    color: #adb5bd;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .topic-section {
+        padding: 1.5rem;
+    }
+    
+    .topic-section .article-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Topic Ribbon Navigation */
+.topic-ribbon {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;  /* Reduced margins */
+    padding: 1.2rem;  /* Slightly reduced padding */
+    background: #e8f0f5;  /* Light blue-gray background */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(4, 34, 51, 0.1);
+}
+
+.topic-button {
+    flex: 1;  /* Make buttons take equal width */
+    max-width: 250px;  /* Limit maximum width */
+    min-width: 200px;  /* Ensure minimum width */
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;  /* Ensure text is centered */
+}
+
+.topic-button:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.topic-button.active {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 6px rgba(4, 34, 51, 0.2);
+}
+
+@media (max-width: 768px) {
+    .topic-ribbon {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+
+    .topic-button {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        padding: 1rem;
+    }
+}
+
+/* Topic Content Sections */
+.topic-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-top: 1rem;  /* Slightly increased from 0.5rem for better spacing */
+}
+
+.topic-content.active {
+    display: block;
+    opacity: 1;
+}
+
+.topic-content .article-grid {
+    margin: 1rem 0 0 0;  /* Only keep top margin */
+}
+
+@media (max-width: 768px) {
+    .topic-ribbon {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .topic-button {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* Rotating Quotes */
+.quote-container {
+    margin: 0.5rem 0;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-wrapper {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.quote-content {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.quote-content.active {
+    opacity: 1;
+    position: relative;
+}
+
+.rotating-quote {
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.quote-author {
+    text-align: right;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    padding-right: 2rem;
 }
 
 /* Media Queries */
