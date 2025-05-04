@@ -730,46 +730,66 @@ footer {
 
 /* Rotating Quotes */
 .quote-container {
-    margin: 0.5rem 0;
-    min-height: 50px;
+    margin: 1.5rem auto;  /* Reduced from 2rem */
+    min-height: 120px;  /* Reduced from 140px */
+    max-width: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 1rem;
+    position: relative;
 }
 
 .quote-wrapper {
-    position: relative;
     width: 100%;
     text-align: center;
+    min-height: 100px;  /* Reduced from 120px */
+    position: relative;
 }
 
 .quote-content {
     position: absolute;
     width: 100%;
     left: 0;
+    top: 0;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0s linear 0.6s;
+    pointer-events: none;
 }
 
 .quote-content.active {
     opacity: 1;
-    position: relative;
+    visibility: visible;
+    transition: opacity 0.6s ease-in-out, visibility 0s linear;
+    pointer-events: auto;
 }
 
 .rotating-quote {
-    font-size: 1.6rem;
+    font-size: 1.6rem;  /* Reduced from 1.8rem */
     font-style: italic;
     font-weight: 300;
     color: var(--primary-color);
-    margin-bottom: 0.3rem;
+    line-height: 1.1;  /* Reduced from 1.15 */
+    margin: 0 0 0.6rem;  /* Reduced from 0.8rem */
 }
 
 .quote-author {
-    text-align: right;
-    font-weight: 700;
+    font-size: 0.9rem;  /* Reduced from 1rem */
+    font-weight: 500;
     color: var(--primary-color);
-    margin: 0;
-    padding-right: 2rem;
+    text-align: right;
+    margin: 0.2rem 2rem 0 0;  /* Reduced top margin from 0.3rem */
+}
+
+@media screen and (max-width: 768px) {
+    .quote-container {
+        min-height: 150px;  /* Reduced from 180px */
+    }
+    
+    .rotating-quote {
+        font-size: 1.4rem;  /* Reduced from 1.6rem */
+    }
 }
 
 /* Media Queries */

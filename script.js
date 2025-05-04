@@ -231,16 +231,40 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const quoteContents = document.querySelectorAll('.quote-content');
     let currentQuoteIndex = 0;
+    let isTransitioning = false;
+
+    // Make sure first quote starts as active
+    if (quoteContents.length > 0) {
+        quoteContents[0].classList.add('active');
+    }
 
     function rotateQuotes() {
-        quoteContents.forEach(quote => {
-            quote.classList.remove('active');
-        });
+        if (isTransitioning || quoteContents.length <= 1) return;
+        isTransitioning = true;
 
-        currentQuoteIndex = (currentQuoteIndex + 1) % quoteContents.length;
-        quoteContents[currentQuoteIndex].classList.add('active');
+        const currentQuote = quoteContents[currentQuoteIndex];
+        const nextIndex = (currentQuoteIndex + 1) % quoteContents.length;
+        const nextQuote = quoteContents[nextIndex];
+
+        // Start transitions
+        currentQuote.style.zIndex = '1';
+        nextQuote.style.zIndex = '2';
+
+        // Remove active class from current quote
+        currentQuote.classList.remove('active');
+
+        // After current quote fades out, show next quote
+        setTimeout(() => {
+            nextQuote.classList.add('active');
+            currentQuoteIndex = nextIndex;
+            isTransitioning = false;
+            currentQuote.style.zIndex = '';
+            nextQuote.style.zIndex = '';
+        }, 600); // Match CSS transition duration
     }
 
     // Set interval for quote rotation (6 seconds)
-    setInterval(rotateQuotes, 6000);
+    if (quoteContents.length > 1) {
+        setInterval(rotateQuotes, 6000);
+    }
 });
