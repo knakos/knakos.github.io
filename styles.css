@@ -168,6 +168,7 @@ skill-tag:hover {
 }
 
 .carousel {
+    width: 100%;
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
