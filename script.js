@@ -201,3 +201,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Topic switching functionality for Quantitative Methods page
+document.addEventListener('DOMContentLoaded', function() {
+    const topicButtons = document.querySelectorAll('.topic-button');
+    const topicSections = document.querySelectorAll('.topic-content');
+
+    topicButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const topic = button.dataset.topic;
+            
+            // Update active button
+            topicButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Update visible content
+            topicSections.forEach(section => {
+                if (section.id === topic) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        });
+    });
+});
+
+// Quote rotation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const quoteContents = document.querySelectorAll('.quote-content');
+    let currentQuoteIndex = 0;
+
+    function rotateQuotes() {
+        quoteContents.forEach(quote => {
+            quote.classList.remove('active');
+        });
+
+        currentQuoteIndex = (currentQuoteIndex + 1) % quoteContents.length;
+        quoteContents[currentQuoteIndex].classList.add('active');
+    }
+
+    // Set interval for quote rotation (6 seconds)
+    setInterval(rotateQuotes, 6000);
+});

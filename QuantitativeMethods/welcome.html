@@ -25,18 +25,159 @@
     <main class="container">
         <section class="topic-overview">
             <div class="topic-intro">
-                <h2>Overview</h2>
-                <p>Discover practical applications of statistical analysis, system dynamics modeling, and quantitative methods in business decision-making, including machine learning applications for improved outcomes.</p>
+                <div class="quote-container">
+                    <div class="quote-wrapper">
+                        <div class="quote-content">
+                            <p class="rotating-quote active">Statistics is the language of knowledge</p>
+                            <p class="quote-author">Karl Pearson</p>
+                        </div>
+                        <div class="quote-content">
+                            <p class="rotating-quote">You can't be a quant without emotion</p>
+                            <p class="quote-author">Emanuel Derman</p>
+                        </div>
+                        <div class="quote-content">
+                            <p class="rotating-quote">In numbers we find patterns, in patterns we find truth</p>
+                            <p class="quote-author">David Hand</p>
+                        </div>
+                        <div class="quote-content">
+                            <p class="rotating-quote">System dynamics: where cause and effect dance in circles</p>
+                            <p class="quote-author">Jay W. Forrester</p>
+                        </div>
+                        <div class="quote-content">
+                            <p class="rotating-quote">Data speaks, but wisdom listens</p>
+                            <p class="quote-author">John Tukey</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="featured-content">
-            <h2>Featured Articles</h2>
+        <nav class="topic-ribbon">
+            <button class="topic-button active" data-topic="statistics">Statistics</button>
+            <button class="topic-button" data-topic="system-dynamics">System Dynamics</button>
+            <button class="topic-button" data-topic="quantitative-methods">Quantitative Methods</button>
+        </nav>
+
+        <section id="statistics" class="topic-content active">
             <div class="article-grid">
                 <div class="article-card">
                     <div class="article-content">
-                        <h3>Coming Soon</h3>
-                        <p>Content is being developed. Check back later for updates.</p>
+                        <h3>Probability Distributions</h3>
+                        <p>Understanding the building blocks of statistical analysis and their applications in business analytics.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Statistics/Articles/probability_distributions.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Regression Analysis</h3>
+                        <p>From basic linear models to advanced applications in business contexts.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Statistics/Articles/regression_fundamentals.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Bayesian Statistics</h3>
+                        <p>Understanding how to update beliefs with evidence in business decision-making.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Statistics/Articles/bayesian_statistics.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Hypothesis Testing</h3>
+                        <p>Making informed decisions through statistical inference.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Statistics/Articles/hypothesis_testing.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="system-dynamics" class="topic-content">
+            <div class="article-grid">
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Feedback Loops</h3>
+                        <p>Understanding the core mechanisms that drive system behavior.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="SD/Articles/feedback_loops.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>System Archetypes</h3>
+                        <p>Common patterns in organizational behavior and system structures.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="SD/Articles/system_archetypes.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Stock and Flow Diagrams</h3>
+                        <p>Tools for visualizing and understanding system structure.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="SD/Articles/stock_and_flow.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Mental Models</h3>
+                        <p>How our understanding shapes system behavior and decision-making.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="SD/Articles/mental_models.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Simulation Modeling</h3>
+                        <p>Building and validating system dynamics models for business applications.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="SD/Articles/simulation_modeling.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quantitative-methods" class="topic-content">
+            <div class="article-grid">
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Optimization Techniques</h3>
+                        <p>Finding the best solutions for complex business problems.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Quant/Articles/optimization_techniques.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-content">
+                        <h3>Decision Analysis</h3>
+                        <p>Structured approaches to making complex choices under uncertainty.</p>
+                        <div class="article-meta">
+                            <span class="date">May 4, 2025</span>
+                            <a href="Quant/Articles/decision_analysis.html" class="read-more">Read More →</a>
+                        </div>
                     </div>
                 </div>
             </div>
