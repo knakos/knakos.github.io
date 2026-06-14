@@ -408,6 +408,22 @@ skill-tag:hover {
     opacity: 0.75;
 }
 
+.btn-more {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 9px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity var(--transition-speed);
+}
+
+.btn-more:hover {
+    opacity: 0.85;
+}
+
 .project-info {
     padding: 20px;
 }
