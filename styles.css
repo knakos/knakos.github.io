@@ -21,6 +21,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Fira Sans', 'Times New Roman', Times, serif;
     line-height: 1.6;
@@ -422,6 +426,34 @@ skill-tag:hover {
 
 .btn-more:hover {
     opacity: 0.85;
+}
+
+.section-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0 10px;
+}
+
+.section-menu a {
+    padding: 8px 20px;
+    background: #fff;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+.section-menu a:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+main section {
+    scroll-margin-top: 20px;
 }
 
 .project-info {
