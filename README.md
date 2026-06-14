@@ -36,21 +36,6 @@ cd knakos.github.io
 python -m http.server
 ```
 
-## Image Placeholders
-
-For development, you'll need to replace the following image placeholders:
-
-- `profile.jpg` - Your profile picture (recommended size: 300x300px)
-- `project1.jpg`, `project2.jpg`, `project3.jpg` - Project images (recommended size: 600x400px)
-
-## Contact Form
-
-The contact form requires a form submission service. To enable it:
-
-1. Create an account with a service like [Formspree](https://formspree.io/)
-2. Update the form action in `script.js` with your endpoint
-3. Uncomment the form submission code
-
 ## Customization
 
 To customize the site:
@@ -65,4 +50,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-Last updated: May 2025
+Last updated: June 2026
