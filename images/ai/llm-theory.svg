@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="300" height="180" role="img" aria-label="Basic LLM Theory">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#073650"/>
+      <stop offset="1" stop-color="#021a28"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.18" r="0.9">
+      <stop offset="0" stop-color="#1FB6C4" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#1FB6C4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="180" fill="url(#bg)"/>
+  <rect width="300" height="180" fill="url(#glow)"/>
+  <g stroke="#ffffff" stroke-opacity="0.28" stroke-width="1.1">
+    <line x1="95" y1="65" x2="150" y2="45"/><line x1="95" y1="65" x2="150" y2="90"/><line x1="95" y1="65" x2="150" y2="135"/>
+    <line x1="95" y1="115" x2="150" y2="45"/><line x1="95" y1="115" x2="150" y2="90"/><line x1="95" y1="115" x2="150" y2="135"/>
+    <line x1="150" y1="45" x2="205" y2="65"/><line x1="150" y1="45" x2="205" y2="115"/>
+    <line x1="150" y1="90" x2="205" y2="65"/><line x1="150" y1="90" x2="205" y2="115"/>
+    <line x1="150" y1="135" x2="205" y2="65"/><line x1="150" y1="135" x2="205" y2="115"/>
+  </g>
+  <g fill="#ffffff">
+    <circle cx="95" cy="65" r="7"/><circle cx="95" cy="115" r="7"/>
+    <circle cx="205" cy="65" r="7"/><circle cx="205" cy="115" r="7"/>
+  </g>
+  <g fill="#1FB6C4">
+    <circle cx="150" cy="45" r="8"/><circle cx="150" cy="90" r="8"/><circle cx="150" cy="135" r="8"/>
+  </g>
+</svg>
