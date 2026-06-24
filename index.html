@@ -39,78 +39,55 @@
             <a href="#about">About Me</a>
         </nav>
 
-        <section class="carousel-section" id="words_of_wisdom">
-            <div class="section-heading">
-                <h2>(Opinionated) Notes</h2>
-                <p>This is a collection of my (opinionated) notes. Swipe or use the navigation buttons to browse.</p>
-            </div>
-            
-            <div class="carousel-container">
-                <div class="carousel">
-                    <!-- Topic 1 -->
-                    <div class="carousel-item">
-                        <img src="images/home/business_strategy_300x160.jpg" alt="Advanced Topics in Business Strategy">
-                        <div class="carousel-content">
-                            <h3>(Relatively) Advanced Topics in Business Strategy</h3>
-                            <p>Let me start from the basics. A work-in-progress discussion of business
-                                strategy based on economic (and behavioral) principles.</p>
-                            <a href="BusinessStrategy/welcome.html" class="read-more">Read More →</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Topic 2 -->
-                    <div class="carousel-item">
-                        <img src="images/home/effectiveness_and_transformation_300x160.jpg" alt="Organizational Effectiveness & Transformation">
-                        <div class="carousel-content">
-                            <h3>Organizational Effectiveness & Transformation</h3>
-                            <p>This is a really difficult yet interesting topic. What drives organizations 
-                                forward or - respectively - what holds them back? 
-                            </p>
-                            <a href="TransformationAndEffectiveness/welcome.html" class="read-more">Read More →</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Topic 3 -->
-                    <div class="carousel-item">
-                        <img src="images/home/ai_300x160.jpg" alt="Artificial Intelligence">
-                        <div class="carousel-content">
-                            <h3>Artificial Intelligence</h3>
-                            <p>Artificial Intelligence will change everything. For the time being, I am interested
-                                in understanding the concepts as well as how organizations can adopt and leverage 
-                                these new technologies to deliver breakthrough results. 
-                                Spoiler: the answer is <b>People and Structures</b>.
-                            </p>
-                            <a href="ArtificialIntelligence/welcome.html" class="read-more">Read More →</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Topic 4 -->
-                    <div class="carousel-item">
-                        <img src="images/home/stats_and_quants_300x160.jpg" alt="Statistics, System Dynamics and other Quantitative Methods for Business">
-                        <div class="carousel-content">
-                            <h3>Statistics, System Dynamics and other Quantitative Methods for Business</h3>
-                            <p>A body of knowledge for making better decisions in the face of
-                                 uncertainty (with a touch of Machine Learning as well).</p>
-                            <a href="QuantitativeMethods/welcome.html" class="read-more">Read More →</a>
-                        </div>
-                    </div>
-
-                    <!-- Topic 5 -->
-                    <div class="carousel-item">
-                        <img src="images/home/misc_300x160.jpg" alt="Miscellaneous guides">
-                        <div class="carousel-content">
-                            <h3>Miscellaneous</h3>
-                            <p>Practical guides and flash thoughts that cannot be classified into
-                                the previous topics (or until I find a better place for them).</p>                            </p>
-                            <a href="Miscellaneous/welcome.html" class="read-more">Read More →</a>
-                        </div>
+        <section id="words_of_wisdom">
+            <h2>(Opinionated) Notes</h2>
+            <div class="projects">
+                <!-- Topic 1 -->
+                <div class="project-card">
+                    <img src="images/home/business_strategy_300x160.jpg" alt="Advanced Topics in Business Strategy" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">(Relatively) Advanced Topics in Business Strategy</h3>
+                        <p>Let me start from the basics. A work-in-progress discussion of business
+                            strategy based on economic (and behavioral) principles.</p>
+                        <a href="BusinessStrategy/welcome.html" class="read-more">Read More →</a>
                     </div>
                 </div>
 
-                <div class="carousel-navigation">
-                    <button class="nav-btn prev">←</button>
-                    <button class="nav-btn next">→</button>
+                <!-- Topic 2 -->
+                <div class="project-card">
+                    <img src="images/home/effectiveness_and_transformation_300x160.jpg" alt="Organizational Effectiveness & Transformation" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Organizational Effectiveness & Transformation</h3>
+                        <p>This is a really difficult yet interesting topic. What drives organizations
+                            forward or - respectively - what holds them back?</p>
+                        <a href="TransformationAndEffectiveness/welcome.html" class="read-more">Read More →</a>
+                    </div>
                 </div>
+
+                <!-- Topic 3 -->
+                <div class="project-card">
+                    <img src="images/home/ai_300x160.jpg" alt="Artificial Intelligence" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Artificial Intelligence</h3>
+                        <p>Artificial Intelligence will change everything. For the time being, I am interested
+                            in understanding the concepts as well as how organizations can adopt and leverage
+                            these new technologies to deliver breakthrough results.
+                            Spoiler: the answer is <b>People and Structures</b>.</p>
+                        <a href="ArtificialIntelligence/welcome.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Topic 4 -->
+                <div class="project-card">
+                    <img src="images/home/stats_and_quants_300x160.jpg" alt="Statistics, System Dynamics and other Quantitative Methods for Business" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Statistics, System Dynamics and other Quantitative Methods for Business</h3>
+                        <p>A body of knowledge for making better decisions in the face of
+                            uncertainty (with a touch of Machine Learning as well).</p>
+                        <a href="QuantitativeMethods/welcome.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -122,11 +99,6 @@
                     <div class="project-info">
                         <h3 class="project-title">How to build a Transformation Program: Lessons from the field</h3>
                         <p>What it actually takes to stand up a transformation function — the governance, the people, and the mistakes worth avoiding.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Business Transformation</span>
-                            <span class="project-tag">Change Management</span>
-                            <span class="project-tag">Strategic Leadership</span>
-                        </div>
                         <a href="projects/transformation-program.html" class="read-more">Coming soon →</a>
                     </div>
                 </div>
@@ -135,11 +107,6 @@
                     <div class="project-info">
                         <h3 class="project-title">Where is organizational effectiveness?</h3>
                         <p>Everyone wants it; few can point to it. A practitioner's take on where effectiveness actually lives in an organization.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Organizational Effectiveness</span>
-                            <span class="project-tag">Operating Model</span>
-                            <span class="project-tag">People</span>
-                        </div>
                         <a href="projects/organizational-effectiveness.html" class="read-more">Coming soon →</a>
                     </div>
                 </div>
@@ -148,11 +115,6 @@
                     <div class="project-info">
                         <h3 class="project-title">Blending AI</h3>
                         <p>Not AI versus people, but AI with them — augmenting how we think, decide and work.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Artificial Intelligence</span>
-                            <span class="project-tag">AI Agents</span>
-                            <span class="project-tag">Augmentation</span>
-                        </div>
                         <a href="projects/blending-ai.html" class="read-more">Coming soon →</a>
                     </div>
                 </div>
@@ -161,11 +123,6 @@
                     <div class="project-info">
                         <h3 class="project-title">Redesigning a Credit Workflow</h3>
                         <p>Rethinking a core lending process end to end — where risk, policy and customer experience meet.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Credit Policy</span>
-                            <span class="project-tag">Process Design</span>
-                            <span class="project-tag">Risk Management</span>
-                        </div>
                         <a href="projects/credit-workflow.html" class="read-more">Coming soon →</a>
                     </div>
                 </div>

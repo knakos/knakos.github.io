@@ -1,53 +1,35 @@
-# Konstantinos Nakos - Personal GitHub Page
+# Konstantinos Nakos — Personal Site
 
-This repository contains the source code for my personal GitHub Pages website.
+Source for my personal website, deployed via **GitHub Pages** at [knakos.github.io](https://knakos.github.io).
 
-## Project Structure
+It is a fully static site: hand-written HTML, one shared `styles.css`, one shared `script.js`. No build step, no framework, no package manager.
 
-The site is built with HTML, CSS, and JavaScript:
+## Structure
 
-- `index.html` - Main HTML structure
-- `styles.css` - All styling for the website
-- `script.js` - Interactive functionality
-- `images/` - Directory containing all image assets
+- `index.html` — landing page: a Notes carousel, a Key Projects grid, and an About section.
+- Topic sections, each a folder with its own `welcome.html` hub:
+  - `ArtificialIntelligence/`, `BusinessStrategy/`, `QuantitativeMethods/`, `TransformationAndEffectiveness/`, `Miscellaneous/`
+  - `QuantitativeMethods/` nests article pages under `Quant/`, `SD/`, `Statistics/`.
+- `projects/` — individual Key Project pages.
+- `positions.html` — career/positions detail, linked from About.
+- `styles.css` — single global stylesheet (theming via CSS variables in `:root`).
+- `script.js` — shared interactivity (carousel, smooth-scroll, topic-ribbon tabs, rotating quotes).
+- `images/` — assets, organized by area (`home/`, `ai/`, `projects/`, `favicon/`). Images are AI-generated.
 
-## Setup and Deployment
-
-This site is deployed using GitHub Pages. To set up your own version:
-
-1. Fork this repository
-2. Rename it to `yourusername.github.io`
-3. Update the content with your personal information
-4. Enable GitHub Pages in the repository settings
-
-## Local Development
-
-To run this site locally:
+## Local development
 
 ```bash
-# Clone the repository
-git clone https://github.com/knakos/knakos.github.io.git
-
-# Navigate to the project directory
-cd knakos.github.io
-
-# Open in your browser
-# You can use any local server like:
-python -m http.server
+python -m http.server   # then open http://localhost:8000
 ```
+
+There is nothing to compile — edit a file and reload the browser. Changes deploy automatically when pushed to `master`.
 
 ## Customization
 
-To customize the site:
-
-- Update colors by changing the CSS variables in `styles.css`
-- Modify the layout by editing the CSS grid and flexbox properties
-- Add or remove sections by editing the HTML structure
+- Colors and shared tokens live as CSS variables in `:root` at the top of `styles.css`.
+- New topic hubs and articles start as a copy of an existing `welcome.html` / article page, with content swapped — keep the shared structure so the shared CSS/JS keep working.
+- Mind relative-path depth (`styles.css` vs `../styles.css`) when adding or moving pages.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-Last updated: June 2026
+Open source under the [MIT License](LICENSE).

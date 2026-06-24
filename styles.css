@@ -355,24 +355,41 @@ skill-tag:hover {
 /* Projects Section */
 .projects {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
+@media (max-width: 900px) {
+    .projects {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .projects {
+        grid-template-columns: 1fr;
+    }
+}
+
 .project-card {
+    background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--card-shadow);
-    transition: transform var(--transition-speed);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.8s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .project-img {
     width: 100%;
-    height: 200px;
+    height: 160px;
     object-fit: cover;
 }
 
@@ -459,25 +476,29 @@ main section {
 
 .project-info {
     padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .project-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    color: #333;
 }
 
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
+.project-info p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
 }
 
-.project-tag {
-    background-color: var(--secondary-color);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+.project-info .read-more {
+    margin-top: auto;
+    color: #3498db;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 /* Video Card Styles */
